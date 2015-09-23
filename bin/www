@@ -1,0 +1,64 @@
+#!/usr/bin/env node
+var http = require('http');
+var https = require('https');
+var spdy = require('spdy');
+var http2 = require('http2');
+var app = require('../app');
+var settings = require('../settings');
+var fs = require('fs');
+
+app.set('port', process.env.PORT || settings.port);
+
+var server, options;
+options = {
+	/*key: fs.readFileSync(__dirname + '/../../../ssl/server.key'),
+  	cert: fs.readFileSync(__dirname + '/../../../ssl/server.crt'),
+	ca: fs.readFileSync(__dirname + '/../../../ssl/ca.crt'),*/
+	maxConcurrentStreams: 100
+};
+/*
+var server = app.listen(app.get('port'), function() {
+  	console.log('Express server listening on port ' + server.address().port);
+});*/
+if (settings.httpType === 'spdy') {
+	options.windowSize = 1024;
+	server = spdy.createServer(options, app);
+	server.listen(settings.port, function() {
+	  var addr = this.address();
+	  console.log('SPDY server is listening on %s:%d', addr.address, addr.port);
+	});
+} else if  (settings.httpType === 'http2') {
+	server = http2.createServer(options, app);
+	server.listen(settings.port, function(a, b) {
+	  var addr = this.address();
+	  console.log('HTTP2 server is listening on %s:%d', addr.address, addr.port);
+	});
+} else if  (settings.httpType === 'https') {
+	server = https.createServer(options, app);
+	server.listen(settings.port, function() {
+	  var addr = this.address();
+	  console.log('HTTPS server is listening on %s:%d', addr.address, addr.port);
+	});
+} else if  (settings.httpType === 'http') {
+	/* Use this if you want SPDY disabled.  Note plain old HTTP 1 is limited to 6 dataset connections. */
+	server = app.listen(app.get('port'), function() {
+	  console.log('Express server listening on port ' + server.address().port);
+	});
+
+} else {
+	console.log('httpType not set.');
+}
+
+if  (settings.httpType !== 'http') {
+	http.createServer(function (req, res) {
+		var correctedServer = req.headers.origin || req.headers.referrer || req.headers.host;
+		var correctedPath = req.headers['x-rewrite-url'] || req.path || '/';
+		correctedServer = correctedServer.replace(':3000', ':' + settings.port);
+		var correctedUrl = 'https://' + correctedServer.replace('http://', '') + correctedPath;
+		//console.log(correctedUrl);
+		res.writeHead(307, {'location': correctedUrl});
+		res.end();
+	}).listen(3000);
+}
+
+
