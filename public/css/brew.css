@@ -2,6 +2,7 @@ body {
 	 background: #ffffff;
  }
 #main { 
+  padding: 3px;
   position: relative;
   margin-right: 60px;
 } 
