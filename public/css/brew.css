@@ -1,24 +1,27 @@
 body {
 	 background: #ffffff;
  }
-#main { position: relative; padding: 10px; } 
+#main { 
+  position: relative;
+  margin-right: 60px;
+} 
 #main:after {
- content : "";
- display: block;
- position: absolute;
- top: 0;
- left: 0;
- background-image: url(/images/beer.jpg);
+ content : ""; 
+ display: block; 
+ position: absolute; 
+ top: 0; 
+ left: 0; 
+ background-image: url(/images/beer.jpg); 
  background-size: contain;
  background-repeat: no-repeat;
- width: 100%;
- height: 100%;
+ width: 100%; 
+ height: 100%; 
  opacity: 0.15;
  z-index: -1;
- animation: fadein 10s;
+ animation: fadein 4s;
 } 
 @keyframes fadein {
-  from { opacity: 0; } to { opacity: 0.18; }
+  from { opacity: 0; } to { opacity: 0.15; }
 }
 #headerRow {
 	width:100%;
@@ -26,4 +29,20 @@ body {
 }
 #headerText {
 	font-weight:bold;
+}
+#imageColumn {
+  width: 50px;
+  position: absolute;
+  right: 0px;
+  top:0;
+}
+@media (max-width: 380px) {
+	 #imageColumn {
+	   display: block;
+	   width: 100%;
+	   position: static;
+  }
+  #main {
+	   margin-right: 0px;
+  }
 }
