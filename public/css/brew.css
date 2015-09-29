@@ -12,7 +12,7 @@ body {
  position: absolute; 
  top: 0; 
  left: 0; 
- background-image: url(/images/beer.jpg); 
+ background-image: url(/images/brew/beer.jpg); 
  background-size: contain;
  background-repeat: no-repeat;
  width: 100%; 
