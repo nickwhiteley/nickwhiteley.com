@@ -37,6 +37,10 @@ body {
   right: 0px;
   top:0;
 }
+#imageColumn img {
+	width: 100%;
+	border: grey solid;
+}
 @media (max-width: 380px) {
 	 #imageColumn {
 	   display: block;
