@@ -38,7 +38,7 @@
 	top: 0px;
 	left: 0px;
 }
-@media only screen and (min-width:480px) {
+@media only screen and (max-width:480px) {
 	#carousel {
 	height: 100px;
 	text-align: center;
