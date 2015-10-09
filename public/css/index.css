@@ -43,7 +43,8 @@
 	height: 100px;
 	text-align: center;
 }
-carouselImage {
+.carouselImage {
 	width: auto;
+	height: 95px
 }
 }
