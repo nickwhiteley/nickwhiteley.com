@@ -4,7 +4,7 @@ body {
 #main { 
   padding: 3px;
   position: relative;
-  margin-right: 60px;
+  margin-right: 210px;
 } 
 #main:after {
  content : ""; 
@@ -19,7 +19,7 @@ body {
  height: 100%; 
  opacity: 0.15;
  z-index: -1;
- animation: fadein 4s;
+ animation: fadein 6s;
 } 
 @keyframes fadein {
   from { opacity: 0; } to { opacity: 0.15; }
@@ -32,14 +32,14 @@ body {
 	font-weight:bold;
 }
 #imageColumn {
-  width: 50px;
+  width: 200px;
   position: absolute;
   right: 0px;
   top:0;
 }
 #imageColumn img {
 	width: 100%;
-	border: grey solid;
+	border: silver solid thin;
 }
 @media (max-width: 380px) {
 	 #imageColumn {
