@@ -47,7 +47,7 @@ window.iflicks = (function iflicks(settings) {
     }
     function cookieAccept() {
         document.getElementById('cookieBanner').className = 'hide';
-        setCookie('cookeiConsent', 'true', 1);
+        setCookie('cookeiConsent', 'true', 365);
     }
 
     function showImage(imageArray, index) {
